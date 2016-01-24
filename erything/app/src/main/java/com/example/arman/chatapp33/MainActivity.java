@@ -1,4 +1,4 @@
-package com.example.arman.chatapp30;
+package com.example.arman.chatapp33;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,31 +78,33 @@ public class MainActivity extends AppCompatActivity {
         Boolean incognito = Boolean.TRUE;
         incognito = getIncognito.isChecked();
 
-        Firebase Ref = new Firebase("https://boiling-heat-6636.firebaseio.com");
-        Firebase RoomsRef = Ref.child("chatrooms");
-        RoomsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                Firebase Ref = new Firebase("https://boiling-heat-6636.firebaseio.com");
-                Firebase RoomsRef = Ref.child("chatrooms");
-                if (snapshot.getValue() != null) {
-                    RoomsRef.setValue(chatroomname);
-                } else {
-                    RoomsRef.push().setValue(chatroomname);
-                }
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
+        final Firebase Ref = new Firebase("https://boiling-heat-6636.firebaseio.com/" + chatroomname);
+//        Ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    Ref.child(chatroomname);
+//                }else{
+//                    Ref.child(chatroomname).setValue("");
+//                }
+//            }
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                System.out.println("The read failed: " + firebaseError.getMessage());
+//            }
+//        });
+        final String trueUsername;
+        if(incognito == true){
+            trueUsername = ("not "+username);
+            Ref.child(chatroomname);
+        }else{
+            trueUsername = (username);
+            String hasEntered = username +" has entered.";
+            Ref.child(chatroomname).setValue(hasEntered);
+        }
         Intent goToChat = new Intent(MainActivity.this, ChatActivity.class);
         goToChat.putExtra("ChatroomNameString", chatroomname);
-        goToChat.putExtra("UsernameString", username);
-        goToChat.putExtra("IncognitoBoolean", incognito);
+        goToChat.putExtra("UsernameString", trueUsername);
         MainActivity.this.startActivity(goToChat);
 
     }

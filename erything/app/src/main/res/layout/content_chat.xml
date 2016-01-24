@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.arman.chatapp30.ChatActivity"
+    tools:context="com.example.arman.chatapp33.ChatActivity"
     tools:showIn="@layout/activity_chat">
 
     <EditText
@@ -19,8 +19,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="40dp"
-        android:layout_alignParentEnd="true"
-        android:hint = "Chat Here"/>
+        android:hint = "Chat Here"
+        android:layout_toStartOf="@+id/sendButton" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -29,4 +29,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/ChatEditText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:id="@+id/sendButton"
+        android:layout_alignBottom="@+id/ChatEditText"
+        android:layout_alignParentEnd="true"
+        android:onClick="sendMessage"/>
+
 </RelativeLayout>
