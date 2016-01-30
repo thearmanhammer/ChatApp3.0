@@ -37,15 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        }};
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
         final String trueUsername;
         if(incognito == true){
             trueUsername = ("not "+username);
-            Ref.child(chatroomname);
-        }else{
+        } else if(incognito == false) {
             trueUsername = (username);
-            String hasEntered = username +" has entered.";
-            Ref.child(chatroomname).setValue(hasEntered);
+            Ref.push().setValue((username +" has entered."));
+        } else {
+            trueUsername = (username);
         }
         Intent goToChat = new Intent(MainActivity.this, ChatActivity.class);
         goToChat.putExtra("ChatroomNameString", chatroomname);
