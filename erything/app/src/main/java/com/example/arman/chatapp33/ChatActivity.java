@@ -46,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
         final String RetrievedUsername = extras.getString("UsernameString");
         final String RetrievedChatroomName = extras.getString("ChatroomNameString");
         setTitle(RetrievedChatroomName);
+        //set up is done
 
         Firebase ref = new Firebase("https://boiling-heat-6636.firebaseio.com/"+RetrievedChatroomName);
         final ListView chatView = (ListView) findViewById(R.id.ChatListView);
